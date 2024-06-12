@@ -1,6 +1,6 @@
 {
     "data": [
-        {
+     {
             "id": "2",
             "member_id": "admin",
             "member_pwd": "admin",
@@ -40,4 +40,4 @@
             "memo": "용돈"
         }
     ]
-}
+  }
