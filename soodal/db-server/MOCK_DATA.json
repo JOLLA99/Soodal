@@ -1,62 +1,43 @@
-[
-    {
-        "id": 1,
-        "member_id": "admin",
-        "member_pwd": "admin",
-        "member_name": "김건영",
-        "email": "fruegg0@google.de",
-        "date": "2024-02-16",
-        "type": "in",
-        "category": "식비",
-        "amount": "8098123",
-        "memo": 1
-    },
-    {
-        "id": 2,
-        "member_id": "admin",
-        "member_pwd": "admin",
-        "member_name": "김건영",
-        "email": "bdouglas1@purevolume.com",
-        "date": "2023-06-25",
-        "type": "in",
-        "category": "식비",
-        "amount": "8973",
-        "memo": 0
-    },
-    {
-        "id": 3,
-        "member_id": "admin",
-        "member_pwd": "admin",
-        "member_name": "김건영",
-        "email": "ccrosson2@moonfruit.com",
-        "date": "2024-04-30",
-        "type": "out",
-        "category": "의료",
-        "amount": "832190",
-        "memo": 0
-    },
-    {
-        "id": 4,
-        "member_id": "admin",
-        "member_pwd": "admin",
-        "member_name": "김건영",
-        "email": "dcruwys3@squidoo.com",
-        "date": "2023-08-31",
-        "type": "out",
-        "category": "여가",
-        "amount": "9123123",
-        "memo": 0
-    },
-    {
-        "id": 5,
-        "member_id": "admin",
-        "member_pwd": "admin",
-        "member_name": "김건영",
-        "email": "adunniom4@guardian.co.uk",
-        "date": "2024-03-11",
-        "type": "in",
-        "category": "생활비",
-        "amount": "9321",
-        "memo": 0
-    }
-]
+{
+    "data": [
+        {
+            "id": "2",
+            "member_id": "admin",
+            "member_pwd": "admin",
+            "member_name": "김건영",
+            "email": "admin@admin.com",
+            "date": "2024-06-10",
+            "time": "15:18",
+            "type": "지출",
+            "category": "여가",
+            "amount": "23809128",
+            "memo": "일본 여행"
+        },
+        {
+            "id": 3,
+            "member_id": "admin",
+            "member_pwd": "admin",
+            "member_name": "김건영",
+            "email": "admin@admin.com",
+            "date": "2024-06-12",
+            "time": "16:03",
+            "type": "수입",
+            "category": "용돈",
+            "amount": "1000",
+            "memo": "용돈"
+        },
+        {
+            "id": 4,
+            "member_id": "admin",
+            "member_pwd": "admin",
+            "member_name": "김건영",
+            "email": "admin@admin.com",
+            "date": "2024-06-12",
+            "time": "16:03",
+            "type": "수입",
+            "category": "용돈",
+            "amount": "1000",
+            "memo": "용돈"
+        }
+    ]
+}
