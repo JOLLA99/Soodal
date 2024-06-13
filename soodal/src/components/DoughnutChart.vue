@@ -144,8 +144,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
+        width: 500px;
         max-width: 700px;
+        height: 420px;
         margin: 0 auto;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
