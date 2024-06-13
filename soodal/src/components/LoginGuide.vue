@@ -1,17 +1,14 @@
 <template>
-    <div class="img">
+    <div class="contents">
         <img src="/images/pre1.png">
     </div>
 </template>
 
-<script>
-</script>
-
 <style scoped>
-.img{
+.contents {
     display: flex;
     justify-content: center;
-    margin-left: 50px;
-    margin-bottom: 100px;
+    align-items: center;
+    height: 100vh;
 }
 </style>

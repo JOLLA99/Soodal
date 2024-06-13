@@ -92,11 +92,11 @@
                     });
                     chartData.value.datasets[0].backgroundColor = Object.values(groupedData).map(monthData => {
                         const type = monthData[0].type;
-                        return type === "out" ? 'rgba(255, 99, 132, 0.4)' : 'rgba(47, 242, 0.4)';
+                        return type === "지출" ? 'rgba(255, 99, 132, 0.4)' : 'rgba(47, 242, 0.4)';
                     });
                     chartData.value.datasets[0].borderColor = Object.values(groupedData).map(monthData => {
                         const type = monthData[0].type;
-                        return type === "out" ? 'rgba(255, 99, 132, 1)' : 'rgba(47, 242, 50, 1)';
+                        return type === "지출" ? 'rgba(255, 99, 132, 1)' : 'rgba(47, 242, 50, 1)';
                     });
                     totalAmount.value = data.reduce((sum, entry) => {
                         return sum + (entry.type === 'in' ? parseInt(entry.amount, 10) : -parseInt(entry.amount, 10));

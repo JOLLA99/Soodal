@@ -11,13 +11,13 @@
           거래 한눈에 보기
         </router-link>
       </li>
-      <li>
+      <li class="nav-item">
         <router-link to="/list" class="nav-link" @click.prevent="navigateTo('/list')">
           거래 내역 조회
         </router-link>
       </li>
-      <li>
-        <router-link to="/calender" class="nav-link" @click.prevent="navigateTo('/calender')">
+      <li class="nav-item">
+        <router-link to="/calendar" class="nav-link" @click.prevent="navigateTo('/calendar')">
           수달 캘린더
         </router-link>
       </li>
@@ -31,7 +31,6 @@
     <!-- 모달창 -->
     <LoginModal :showModal="isModalVisible" @close="isModalVisible = false" @login="handleLogin" />
     <LoginReminderModal :showModal="isReminderVisible" @close="isReminderVisible = false" />
-
   </div>
 </template>
 
@@ -77,6 +76,7 @@ export default {
       if (user) {
         isLoggedIn.value = true;
         memberName.value = user.member_name;
+        localStorage.setItem('loggedInUser', JSON.stringify({ memberId: user.member_id, memberPwd: user.member_pwd }));
         isModalVisible.value = false;
         router.push('/main');
       }
@@ -91,6 +91,7 @@ export default {
     const logout = () => {
       isLoggedIn.value = false;
       memberName.value = '';
+      localStorage.removeItem('loggedInUser');
       router.push('/');
     };
 
@@ -104,6 +105,15 @@ export default {
     };
 
     onMounted(() => {
+      // 페이지 로드 시 로그인 상태 확인
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      if (loggedInUser) {
+        const { memberId, memberPwd } = JSON.parse(loggedInUser);
+        handleLogin(memberId, memberPwd);
+      } else {
+        isLoggedIn.value = false; // 로그인 정보가 없으면 로그아웃 상태로 처리
+      }
+
       getData();
     });
 
@@ -133,11 +143,11 @@ export default {
 .greeting {
   font-size: larger;
   text-align: center;
-  margin-bottom: 10%;
+  margin-bottom: 30px;
 }
 
 .nav {
-  margin-left: 10%;
+  margin-left: 20%;
   list-style-type: none;
   line-height: 50px;
   font-size: large;
@@ -145,6 +155,11 @@ export default {
 
 .nav-link {
   color: #333333;
+}
+
+.nav-item{
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .nav-link:hover {
@@ -163,14 +178,15 @@ export default {
   color: white;
   font-size: large;
   background-color: #6E6053;
-  width: 150px;
-  height: 40px;
+  width: 130px;
+  height: 45px;
   border: none;
-  border-radius: 10px;
-  margin-top: auto;
+  border-radius: 30px;
+  font-size: larger;
 }
 
 .btn:hover {
+  color: white;
   background-color: #5A4E44;
 }
 </style>

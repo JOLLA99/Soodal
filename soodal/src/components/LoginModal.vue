@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { ref, onMounted } from 'vue';
 
 export default {
     props: ['showModal'],
@@ -48,6 +48,16 @@ export default {
         };
 
         const handleLogin = () => {
+            if (!memberId.value) {
+                errorMessage.value = '';
+                return;
+            } else {
+                if (!memberPwd.value) {
+                    errorMessage.value = '비밀번호를 입력해주세요.';
+                    return;
+                }
+            }
+
             const user = users.value.find(
                 user => user.member_id === memberId.value && user.member_pwd === memberPwd.value
             );
@@ -56,6 +66,7 @@ export default {
                 errorMessage.value = '';
                 memberId.value = '';
                 memberPwd.value = '';
+                localStorage.setItem('loggedInUser', JSON.stringify({ memberId: user.member_id, memberPwd: user.member_pwd }));
                 emit('login', user.member_id, user.member_pwd);
                 emit('close');
             } else {
@@ -68,6 +79,15 @@ export default {
             }
         };
 
+        const checkLogin = () => {
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                const user = JSON.parse(loggedInUser);
+                emit('login', user.memberId, user.memberPwd);
+                emit('close');
+            }
+        };
+
         const closeModal = () => {
             memberId.value = '';
             memberPwd.value = '';
@@ -77,9 +97,10 @@ export default {
 
         onMounted(() => {
             getData();
+            checkLogin();
         });
 
-        return { memberId, memberPwd, errorMessage, handleLogin, closeModal };
+        return { memberId, memberPwd, errorMessage, handleLogin, closeModal, getData };
     }
 };
 </script>
@@ -113,6 +134,17 @@ export default {
     text-align: center;
 }
 
+.modal-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    outline: none;
+}
+
 .btn-close {
     position: absolute;
     top: 10px;
@@ -121,6 +153,8 @@ export default {
     background: none;
     font-size: 20px;
     cursor: pointer;
+    outline: none;
+    /* Remove blue outline */
 }
 
 .form-group {
@@ -142,7 +176,6 @@ export default {
     text-align: center;
     margin-right: 10px;
     min-width: 80px;
-    font-weight: bolder;
 }
 
 .logo {
@@ -157,21 +190,17 @@ export default {
     padding: 10px;
     border: 1px solid #6E6053;
     border-radius: 30px;
-}
-
-.form-control:focus {
-    outline: 1px solid #6E6053;
+    outline: none; /* 포커스 시 파란색 테두리 제거 */
 }
 
 .loginBtn {
-    margin-top: 5%;
-    margin-bottom: 20px;
-    width: 40%;
+    /* max-width: 180px; */
+    width: 50%;
     background-color: #ffd700;
     border: none;
     padding: 10px;
     border-radius: 30px;
-    font-size: 20px;
+    font-size: large;
     font-weight: bold;
     color: #6E6053;
 }
