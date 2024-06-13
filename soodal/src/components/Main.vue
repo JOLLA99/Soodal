@@ -53,7 +53,7 @@
             }
             const getOutData = async () =>{
                 try{
-                    const response = await axios.get("http://localhost:3001/data?type=out");
+                    const response = await axios.get("http://localhost:3001/data?type=지출");
                     dataOut.value = response.data.slice();
                     console.log("dataOut is ");
                     console.log(dataOut.value);
