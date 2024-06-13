@@ -99,7 +99,7 @@
                         return type === "지출" ? 'rgba(255, 99, 132, 1)' : 'rgba(47, 242, 50, 1)';
                     });
                     totalAmount.value = data.reduce((sum, entry) => {
-                        return sum + (entry.type === 'in' ? parseInt(entry.amount, 10) : -parseInt(entry.amount, 10));
+                        return sum + (entry.type === '수입' ? parseInt(entry.amount, 10) : -parseInt(entry.amount, 10));
                     }, 0);
                     loaded.value = true;
                     console.log(chartData.value);
