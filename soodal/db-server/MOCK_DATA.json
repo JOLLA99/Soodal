@@ -53,32 +53,6 @@
       "memo": "차"
     },
     {
-      "id": "5",
-      "member_id": "admin",
-      "member_pwd": "admin",
-      "member_name": "김건영",
-      "email": "admin@admin.com",
-      "date": "2024-05-15",
-      "time": "15:30",
-      "type": "지출",
-      "category": "식비",
-      "amount": 12312312,
-      "memo": "123123"
-    },
-    {
-      "id": "6",
-      "member_id": "admin",
-      "member_pwd": "admin",
-      "member_name": "김건영",
-      "email": "admin@admin.com",
-      "date": "2024-05-21",
-      "time": "14:35",
-      "type": "지출",
-      "category": "교통",
-      "amount": 120000,
-      "memo": "버스비"
-    },
-    {
       "id": "7",
       "member_id": "admin",
       "member_pwd": "admin",
