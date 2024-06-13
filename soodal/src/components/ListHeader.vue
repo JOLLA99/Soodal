@@ -1,0 +1,66 @@
+<template lang="">
+    <div>
+        <div>
+            <!--돋보기 버튼 이미지를 클릭하면 필터링 된 테이블 값을 화면에 출력한다-->
+            <img src='../../images/glass_icon.png' alt="돋보기 아이콘" width="23px" @click="SearchClickEvent"/>
+            <select id="dropdown" name="dropdown" v-model="selectedCategory">
+                <option value="식비" selected>식비</option>
+                <option value="쇼핑">쇼핑</option>
+                <option value="교통">교통</option>
+                <option value="의료">의료</option>
+                <option value="여가">여가</option>
+                <option value="생활비">생활비</option>
+
+                <option value="급여">급여</option>
+                <option value="용돈">용돈</option>
+            </select>
+        </div>
+        
+
+        <!--모달 팝업창 구현 (새로 리스트 추가)-->
+        <img src="../../images/memo_icon.png" width="23px" @click="openModal" alt="추가 이미지" />
+        <AddList :isVisible="isModalVisible" @close="closeModal">
+            <!-- <p>여기에 모달 내용을 넣으세요.</p> -->
+        </AddList>
+    </div>
+
+</template>
+<script>
+import { onMounted, ref } from 'vue';
+import AddList from './AddList.vue';
+export default {
+    name: "ListHeader",
+    components: {
+        AddList
+    },
+    setup(props, { emit }) {
+
+        const selectedCategory = ref('')
+
+        //돋보기 버튼 클릭 시 필터링 기능 
+        const SearchClickEvent = () => {
+            console.log("ListHeader emit : ", selectedCategory.value)
+            emit('search-click', selectedCategory.value)
+        }
+
+        const isModalVisible = ref(false);
+
+        const openModal = () => {
+            isModalVisible.value = true;
+        };
+
+        const closeModal = () => {
+            isModalVisible.value = false;
+        };
+
+        return { onMounted, selectedCategory, SearchClickEvent, isModalVisible, openModal, closeModal }
+    }
+
+
+}
+</script>
+<style scoped>
+* {
+    text-align: center;
+}
+</style>

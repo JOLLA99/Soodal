@@ -1,43 +1,17 @@
 {
-    "data": [
-     {
-            "id": "2",
-            "member_id": "admin",
-            "member_pwd": "admin",
-            "member_name": "김건영",
-            "email": "admin@admin.com",
-            "date": "2024-05-10",
-            "time": "15:18",
-            "type": "지출",
-            "category": "여가",
-            "amount": "23809128",
-            "memo": "일본 여행"
-        },
-        {
-            "id": 3,
-            "member_id": "admin",
-            "member_pwd": "admin",
-            "member_name": "김건영",
-            "email": "admin@admin.com",
-            "date": "2024-06-12",
-            "time": "16:03",
-            "type": "수입",
-            "category": "용돈",
-            "amount": "1000",
-            "memo": "용돈"
-        },
-        {
-            "id": 4,
-            "member_id": "admin",
-            "member_pwd": "admin",
-            "member_name": "김건영",
-            "email": "admin@admin.com",
-            "date": "2024-06-12",
-            "time": "16:03",
-            "type": "수입",
-            "category": "용돈",
-            "amount": "1000",
-            "memo": "용돈"
-        }
-    ]
-  }
+  "data": [
+    {
+      "id": 0,
+      "member_id": "admin",
+      "member_pwd": "admin",
+      "member_name": "김건영",
+      "email": "admin@admin.com",
+      "date": "2024-06-13",
+      "time": "13:00",
+      "type": "수입",
+      "category": "급여",
+      "amount": "5150000",
+      "memo": "월급"
+    }
+  ]
+}
