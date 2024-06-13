@@ -1,9 +1,9 @@
 <template>
     <div class="chart-container">
         <h4>월 별 입/출금 내역</h4>
-        <Doughnut v-if="loaded" :options="chartOptions" :data="chartData"  />
-        <div v-if="loaded" class="total-amount">
-            <h4>총 {{ totalAmount }} 원</h4>
+        <Doughnut v-if="loaded" :options="chartOptions" :data="chartData" />
+        <div v-if="loaded" class="total-amount" :class="{ positive: totalAmount > 0, negative: totalAmount < 0 }">
+            <h4>TOTAL {{ formatAmount(totalAmount) }} </h4>
         </div>
     </div>
 </template>
@@ -11,10 +11,11 @@
 <script>
     import { Doughnut } from 'vue-chartjs'
     import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale } from 'chart.js'
+    import ChartDataLabels from 'chartjs-plugin-datalabels'
     import { ref, onMounted } from 'vue'
     import axios from 'axios'
 
-    ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale)
+    ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale, LinearScale, ChartDataLabels)
 
     export default {
         name: 'DoughnutChart',
@@ -33,7 +34,7 @@
                 }]
             });
             const chartOptions = ref({
-                responsive: false,
+                responsive: true,
                 plugins: {
                     legend: {
                         display: true,
@@ -50,7 +51,6 @@
                         fullSize: true,
                         align: "right"
                     },
-
                     tooltip: {
                         callbacks: {
                             label: function (context) {
@@ -76,7 +76,17 @@
                             borderWidth: 2
                         }
                     },
-
+                    datalabels: {
+                        color: function (context) {
+                            return context.dataset.data[context.dataIndex] < 0 ? 'red' : 'green';
+                        },
+                        font: {
+                            size: 14,
+                        },
+                        formatter: function (value) {
+                            return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(value);
+                        }
+                    }
                 }
             });
 
@@ -87,17 +97,13 @@
                     // Process data to extract labels and amounts grouped by month
                     const groupedData = groupDataByMonth(data);
                     chartData.value.labels = Object.keys(groupedData).map(month => `${month}월`);
-                    chartData.value.datasets[0].data = Object.values(groupedData).map(monthData => {
-                        return monthData.reduce((sum, entry) => sum + parseInt(entry.amount, 10), 0);
+                    const monthAmounts = Object.values(groupedData).map(monthData => {
+                        return monthData.reduce((sum, entry) => sum + (entry.type === '수입' ? parseInt(entry.amount, 10) : -parseInt(entry.amount, 10)), 0);
                     });
-                    chartData.value.datasets[0].backgroundColor = Object.values(groupedData).map(monthData => {
-                        const type = monthData[0].type;
-                        return type === "지출" ? 'rgba(255, 99, 132, 0.4)' : 'rgba(47, 242, 0.4)';
-                    });
-                    chartData.value.datasets[0].borderColor = Object.values(groupedData).map(monthData => {
-                        const type = monthData[0].type;
-                        return type === "지출" ? 'rgba(255, 99, 132, 1)' : 'rgba(47, 242, 50, 1)';
-                    });
+                    chartData.value.datasets[0].data = monthAmounts;
+                    chartData.value.datasets[0].backgroundColor = monthAmounts.map(amount => amount < 0 ? 'rgba(255, 99, 132, 0.4)' : 'rgba(47, 242, 0.4)');
+                    chartData.value.datasets[0].borderColor = monthAmounts.map(amount => amount < 0 ? 'rgba(255, 99, 132, 1)' : 'rgba(47, 242, 50, 1)');
+
                     totalAmount.value = data.reduce((sum, entry) => {
                         return sum + (entry.type === '수입' ? parseInt(entry.amount, 10) : -parseInt(entry.amount, 10));
                     }, 0);
@@ -119,12 +125,15 @@
                 });
                 return groupedData;
             }
+            const formatAmount = (amount) => {
+                return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(amount);
+            };
 
             onMounted(() => {
                 getData();
             })
 
-            return { chartData, chartOptions, loaded, totalAmount }
+            return { chartData, chartOptions, loaded, totalAmount, formatAmount }
         }
     }
 </script>
@@ -135,8 +144,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
+        width: 500px;
         max-width: 700px;
+        height: 420px;
         margin: 0 auto;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -152,6 +162,14 @@
     .total-amount {
         margin-top: 20px;
         font-size: 18px;
+    }
+
+    .total-amount.positive {
+        color: green;
+    }
+
+    .total-amount.negative {
+        color: red;
     }
 
     .chart-container canvas {

@@ -19,12 +19,65 @@
       "member_pwd": "admin",
       "member_name": "김건영",
       "email": "admin@admin.com",
-      "date": "2024-06-13",
-      "time": "03:03",
+      "date": "2024-06-01",
+      "time": "16:18",
+      "type": "지출",
+      "category": "식비",
+      "amount": "50000",
+      "memo": "맥도날드"
+    },
+    {
+      "id": "8",
+      "member_id": "admin",
+      "member_pwd": "admin",
+      "member_name": "김건영",
+      "email": "admin@admin.com",
+      "date": "2024-05-31",
+      "time": "16:47",
       "type": "수입",
       "category": "급여",
-      "amount": "3000",
-      "memo": "3000"
+      "amount": 123124,
+      "memo": "5555"
+    },
+    {
+      "id": 6,
+      "member_id": "admin",
+      "member_pwd": "admin",
+      "member_name": "김건영",
+      "email": "admin@admin.com",
+      "date": "2024-02-26",
+      "time": "18:40",
+      "type": "수입",
+      "category": "용돈",
+      "amount": 12312312,
+      "memo": "용용용"
+    },
+    {
+      "id": 7,
+      "member_id": "admin",
+      "member_pwd": "admin",
+      "member_name": "김건영",
+      "email": "admin@admin.com",
+      "date": "2024-02-26",
+      "time": "18:40",
+      "type": "수입",
+      "category": "용돈",
+      "amount": 12312312,
+      "memo": "용용용"
+    },
+    {
+      "id": 8,
+      "member_id": "admin",
+      "member_pwd": "admin",
+      "member_name": "김건영",
+      "email": "admin@admin.com",
+      "date": "2024-02-26",
+      "time": "18:40",
+      "type": "수입",
+      "category": "용돈",
+      "amount": 12312312,
+      "memo": "용용용"
+
     }
   ]
 }

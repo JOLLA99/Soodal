@@ -4,6 +4,7 @@
 >“**수**입이 얼마일까 이번 **달**은?”
 
 수달($OODAL)은 KB IT’s Your Life에서 진행하는 스켈레톤 프로젝트로 vue를 활용하여 개발한 개인 가계부 웹 서비스입니다.
+
 사용자는 **거래 한눈에 보기** 기능으로 월별 수입/지출 그래프, 최근 거래 내역, 지출 금액과 건수 TOP3 항목을 확인할 수 있습니다. 두 번째로 **거래 내역 조회** 페이지에서 전체 거래 내역을 조회, 추가, 삭제 할 수 있습니다. 카테고리 별로 정렬하여 조회도 가능합니다. 마지막으로 **수달 캘린더** 페이지에서는 캘린더에서 한눈으로 수입과 지출 항목을 확인할 수 있습니다.
 
 
@@ -59,10 +60,15 @@ data라는 이름을 가지는 jSON 데이터 아래로 **id값이 PK**
 아래에 프로젝트 스트럭쳐 추가
 
 ## Technical Stack
+![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 
 ## Web Preview 
 
 ## Contributor
-- 주정윤,  [github](https://github.com/JOLLA99)
-- 김건영, 
-- 권초원, 
+- 전공 B반 주정윤, [github](https://github.com/JOLLA99)
+- 전공 B반 김건영,  
+- 전공 B반 권초원, 
