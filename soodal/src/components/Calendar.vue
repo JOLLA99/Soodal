@@ -96,6 +96,7 @@ export default defineComponent({
     .demo-app-main {
         flex-grow: 1;
         padding: 3em;
+        padding-bottom: 0;
     }
     .fc { /* the calendar root */
         max-width: 1100px;

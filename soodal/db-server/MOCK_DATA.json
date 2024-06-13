@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "id": 0,
+      "id": "0",
       "member_id": "admin",
       "member_pwd": "admin",
       "member_name": "김건영",
@@ -12,6 +12,19 @@
       "category": "급여",
       "amount": "5150000",
       "memo": "월급"
+    },
+    {
+      "id": "2",
+      "member_id": "admin",
+      "member_pwd": "admin",
+      "member_name": "김건영",
+      "email": "admin@admin.com",
+      "date": "2024-06-13",
+      "time": "03:03",
+      "type": "수입",
+      "category": "급여",
+      "amount": "3000",
+      "memo": "3000"
     }
   ]
 }

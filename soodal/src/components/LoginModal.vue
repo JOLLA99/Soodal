@@ -1,8 +1,9 @@
+<!-- LoginModal.vue -->
 <template>
     <div v-if="showModal" class="modal-backdrop">
         <div class="modal-dialog" @click.stop>
             <div class="modal-content">
-                <button type="button" class="btn-close" @click="closeModal" style="color: #333333;">X</button>
+                <button type="button" class="btn-close" @click="closeModal">X</button>
                 <img class="logo" src="/images/soodal_logo.png" alt="Logo" />
 
                 <div class="modal-body">
@@ -15,7 +16,7 @@
                         <input v-model="memberPwd" type="password" class="form-control" id="memberPwd"
                             autocomplete="off" />
                     </div>
-                    <p v-if="errorMessage" class="msg">ㅤ{{ errorMessage }}</p>
+                    <p v-if="errorMessage" class="msg">{{ errorMessage }}</p>
                 </div>
 
                 <div class="modal-footer">
@@ -26,84 +27,61 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import axios from 'axios';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-export default {
-    props: ['showModal'],
-    setup(props, { emit }) {
-        const memberId = ref('');
-        const memberPwd = ref('');
-        const errorMessage = ref('');
-        const users = ref([]);
+const props = defineProps(['showModal']);
+const emit = defineEmits(['close', 'login']);
 
-        const getData = async () => {
-            try {
-                const response = await axios.get("http://localhost:3001/data");
-                users.value = response.data;
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+const memberId = ref('');
+const memberPwd = ref('');
+const errorMessage = ref('');
+const users = ref([]);
+const router = useRouter();
 
-        const handleLogin = () => {
-            if (!memberId.value) {
-                errorMessage.value = '';
-                return;
-            } else {
-                if (!memberPwd.value) {
-                    errorMessage.value = '비밀번호를 입력해주세요.';
-                    return;
-                }
-            }
-
-            const user = users.value.find(
-                user => user.member_id === memberId.value && user.member_pwd === memberPwd.value
-            );
-
-            if (user) {
-                errorMessage.value = '';
-                memberId.value = '';
-                memberPwd.value = '';
-                localStorage.setItem('loggedInUser', JSON.stringify({ memberId: user.member_id, memberPwd: user.member_pwd }));
-                emit('login', user.member_id, user.member_pwd);
-                emit('close');
-            } else {
-                const existingUser = users.value.find(user => user.member_id === memberId.value);
-                if (existingUser) {
-                    errorMessage.value = '비밀번호가 일치하지 않습니다.';
-                } else {
-                    errorMessage.value = '존재하지 않는 아이디입니다.';
-                }
-            }
-        };
-
-        const checkLogin = () => {
-            const loggedInUser = localStorage.getItem('loggedInUser');
-            if (loggedInUser) {
-                const user = JSON.parse(loggedInUser);
-                emit('login', user.memberId, user.memberPwd);
-                emit('close');
-            }
-        };
-
-        const closeModal = () => {
-            memberId.value = '';
-            memberPwd.value = '';
-            errorMessage.value = '';
-            emit('close');
-        };
-
-        onMounted(() => {
-            getData();
-            checkLogin();
-        });
-
-        return { memberId, memberPwd, errorMessage, handleLogin, closeModal, getData };
+const getData = async () => {
+    try {
+        const response = await axios.get("http://localhost:3001/data");
+        users.value = response.data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
     }
 };
+
+const handleLogin = () => {
+    if (!memberId.value || !memberPwd.value) {
+        errorMessage.value = '아이디와 비밀번호를 모두 입력해주세요.';
+        return;
+    }
+
+    const user = users.value.find(
+        user => user.member_id === memberId.value && user.member_pwd === memberPwd.value
+    );
+
+    if (user) {
+        errorMessage.value = '';
+        memberId.value = '';
+        memberPwd.value = '';
+        localStorage.setItem('loggedInUser', JSON.stringify({ memberId: user.member_id, memberPwd: user.member_pwd }));
+        emit('login', user.member_id, user.member_pwd);
+        emit('close');
+    } else {
+        errorMessage.value = '아이디 또는 비밀번호가 일치하지 않습니다.';
+    }
+};
+
+const closeModal = () => {
+    memberId.value = '';
+    memberPwd.value = '';
+    errorMessage.value = '';
+    emit('close');
+};
+
+getData();
 </script>
+
 
 <style scoped>
 .modal-backdrop {
@@ -152,9 +130,10 @@ export default {
     border: none;
     background: none;
     font-size: 20px;
-    cursor: pointer;
+}
+
+.btn-close:focus {
     outline: none;
-    /* Remove blue outline */
 }
 
 .form-group {
@@ -190,7 +169,6 @@ export default {
     padding: 10px;
     border: 1px solid #6E6053;
     border-radius: 30px;
-    outline: none; /* 포커스 시 파란색 테두리 제거 */
 }
 
 .loginBtn {
