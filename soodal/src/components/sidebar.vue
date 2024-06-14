@@ -1,20 +1,20 @@
-<!-- Sidebar.vue -->
 <template>
   <div class="sidebar-container">
     <img class="logo" src="/images/soodal_logo.png" alt="Logo" />
     <div v-if="isLoggedIn" class="greeting">
-      <span style="font-weight: bold">{{ memberName }}</span>님, 안녕하세요!
+      <span style="font-weight: bold">{{ name }}</span>님, 안녕하세요!
     </div>
 
     <ul class="nav">
       <li class="nav-item">
-        <router-link to="/main" class="nav-link" :class="{ 'active': currentRoute === '/main' }">거래 한눈에 보기</router-link>
+        <a @click="navigateTo('/main')" class="nav-link" :class="{ 'active': currentRoute === '/main' }">거래 한눈에 보기</a>
       </li>
       <li class="nav-item">
-        <router-link to="/list" class="nav-link" :class="{ 'active': currentRoute === '/list' }">거래 내역 조회</router-link>
+        <a @click="navigateTo('/list')" class="nav-link" :class="{ 'active': currentRoute === '/list' }">거래 내역 조회</a>
       </li>
       <li class="nav-item">
-        <router-link to="/calendar" class="nav-link" :class="{ 'active': currentRoute === '/calendar' }">수달 캘린더</router-link>
+        <a @click="navigateTo('/calendar')" class="nav-link" :class="{ 'active': currentRoute === '/calendar' }">수달
+          캘린더</a>
       </li>
     </ul>
 
@@ -23,10 +23,8 @@
       <button v-else @click="confirmLogout" class="btn">Logout</button>
     </div>
 
-    <!-- LoginModal Component -->
+    <!-- 모달창 -->
     <LoginModal :showModal="isModalVisible" @close="isModalVisible = false" @login="handleLogin" />
-
-    <!-- LoginReminderModal Component -->
     <LoginReminderModal :showModal="isReminderVisible" @close="isReminderVisible = false" />
   </div>
 </template>
@@ -34,46 +32,31 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
 import LoginModal from './LoginModal.vue';
 import LoginReminderModal from './LoginReminderModal.vue';
 
 const isLoggedIn = ref(false);
 const isModalVisible = ref(false);
 const isReminderVisible = ref(false);
-const memberName = ref('');
-const users = ref([]);
+const name = ref('');
 const router = useRouter();
-const currentRoute = ref(router.currentRoute.value.path); // Reactive property for current route
-
-const getData = async () => {
-  try {
-    const response = await axios.get("http://localhost:3001/data");
-    users.value = response.data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
+const currentRoute = ref(router.currentRoute.value.path);
 
 const showLoginModal = () => {
   isModalVisible.value = true;
 };
 
-const handleLogin = (memberId, memberPwd) => {
-  const obj = localStorage.getItem('loggedInUser')
-  const user = users.value.find(
-    user => user.member_id === memberId && user.member_pwd === memberPwd
-  );
+const handleLogin = (memberName) => {
+  const loggedInUser = localStorage.getItem('loggedInUser');
 
-  if (obj) {
+  if (loggedInUser) {
     isLoggedIn.value = true;
-    memberName.value = user.member_name;
-    localStorage.setItem('loggedInUser', JSON.stringify({ memberId: user.member_id, memberPwd: user.member_pwd, isLoggedIn: true }));
+    name.value = memberName;
     isModalVisible.value = false;
     router.push('/main');
-  }
-  else{
+  } else {
     isLoggedIn.value = false;
+    localStorage.removeItem('loggedInUser');
   }
 };
 
@@ -85,7 +68,6 @@ const confirmLogout = () => {
 
 const logout = () => {
   isLoggedIn.value = false;
-  memberName.value = '';
   localStorage.removeItem('loggedInUser');
   router.push('/');
 };
@@ -95,27 +77,22 @@ const navigateTo = (route) => {
     router.push(route);
   } else {
     isReminderVisible.value = true;
-    router.push('/');
   }
 };
 
 onMounted(() => {
-  getData();
-  // 페이지 로드 시 로그인 상태 확인
   const loggedInUser = localStorage.getItem('loggedInUser');
   if (loggedInUser) {
-    const { memberId, memberPwd, isLoggedIn } = JSON.parse(loggedInUser);
-    if (isLoggedIn) {
-      handleLogin(memberId, memberPwd);
+    const { memberName } = JSON.parse(loggedInUser);
+    if (memberName) {
+      handleLogin(memberName);
     }
   }
 });
 
-// Watch for route changes to update currentRoute
-watch(router.currentRoute, (to, from) => {
+watch(router.currentRoute, (to) => {
   currentRoute.value = to.path;
 });
-
 </script>
 
 <style scoped>
@@ -152,6 +129,7 @@ watch(router.currentRoute, (to, from) => {
 
 .nav-link {
   color: #333333;
+  cursor: pointer;
 }
 
 .nav-item {

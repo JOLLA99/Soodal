@@ -27,20 +27,7 @@
       "memo": "맥도날드"
     },
     {
-      "id": "8",
-      "member_id": "admin",
-      "member_pwd": "admin",
-      "member_name": "김건영",
-      "email": "admin@admin.com",
-      "date": "2024-05-31",
-      "time": "16:47",
-      "type": "수입",
-      "category": "급여",
-      "amount": 123124,
-      "memo": "5555"
-    },
-    {
-      "id": 6,
+      "id": "6",
       "member_id": "admin",
       "member_pwd": "admin",
       "member_name": "김건영",
@@ -53,7 +40,7 @@
       "memo": "용용용"
     },
     {
-      "id": 7,
+      "id": "7",
       "member_id": "admin",
       "member_pwd": "admin",
       "member_name": "김건영",
@@ -66,18 +53,17 @@
       "memo": "용용용"
     },
     {
-      "id": 8,
+      "id": "7",
       "member_id": "admin",
       "member_pwd": "admin",
       "member_name": "김건영",
       "email": "admin@admin.com",
-      "date": "2024-02-26",
-      "time": "18:40",
-      "type": "수입",
-      "category": "용돈",
-      "amount": 12312312,
-      "memo": "용용용"
-
+      "date": "2024-06-13",
+      "time": "07:08",
+      "type": "지출",
+      "category": "교통",
+      "amount": 35000,
+      "memo": "출퇴근"
     }
   ]
 }
