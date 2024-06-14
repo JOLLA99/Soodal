@@ -43,23 +43,23 @@ export default defineComponent({
             eventDidMount: handleEventMount
         })
         onMounted(async () => {
-            const transactions = await fetchUserTransactions()
-            calendarOptions.events = transactions;
-            console.log(transactions)
-            currentEvents.value = transactions
+            const userdata = await fetchUserTransactions()
+            calendarOptions.events = userdata;
+            console.log(userdata)
+            currentEvents.value = userdata
         })
         async function fetchUserTransactions() {
             try {
                 const response = await axios.get(`http://localhost:3001/data`)
                 // 서버로부터 받은 데이터를 가공
-                const transactions = response.data.map(transaction => ({
+                const userdata = response.data.map(transaction => ({
                     ...transaction,
                     start: transaction.date,
                     end: transaction.date,
                     backgroundColor: transaction.type === '지출' ? 'red' : 'green',
                     borderColor: transaction.type === '지출' ? 'red' : 'green'
                 }));
-                return transactions;
+                return userdata;
             } catch (error) {
                 console.error("Error occurred: ", error)
                 return []

@@ -37,8 +37,6 @@
   import { ref, onMounted, computed, getCurrentInstance } from 'vue';
   import axios from 'axios';
   import ListHeader from './ListHeader.vue';
-
-
   export default {
     components: {
       ListHeader,
