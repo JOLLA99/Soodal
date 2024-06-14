@@ -1,7 +1,6 @@
 <template>
     <div class="expense-form">
         <div class="form-group">
-            <!-- <label for="category" class="icon"><i class="fas fa-bookmark"></i></label> -->
             <img src='../../images/category_icon.png' alt="" width="20px"/>
             <select id="category" v-model="expenseType">
                 <option value="식비" selected>식비</option>
@@ -13,26 +12,27 @@
             </select>
         </div>
         <div class="form-group">
-            <!-- <label for="amount" class="icon"><i class="fas fa-dollar-sign"></i></label> -->
             <img src='../../images/money_icon.png' alt="" width="20px"/>
             <input type="number" id="amount" v-model="expenseAmount" placeholder="지출 금액을 입력하세요." />
         </div>
         <div class="form-group">
-            <!-- <label for="details" class="icon"><i class="fas fa-pencil-alt"></i></label> -->
             <img src='../../images/memo_icon.png' alt="" width="20px"/>
             <input type="text" id="details" v-model="expenseMemo" placeholder="지출 내역을 입력하세요." />
         </div>
         <div class="form-group">
-            <!-- <label for="date" class="icon"><i class="fas fa-calendar-alt"></i></label> -->
             <img src='../../images/calendar_icon.png' alt="" width="20px"/>
             <input type="date" id="date" v-model="expenseDate" />
-            <!-- <label for="time" class="icon"><i class="fas fa-clock"></i></label> -->
             <img src='../../images/time_icon.png' alt="" width="20px"/>
             <input type="time" id="time" v-model="expenseTime" />
         </div>
         <div class="buttons">
-            <!-- <button @click="cancel" class="cancel-button">취소</button> -->
-            <button class="confirm-button" @click="ConfirmBtnSubmitHandler">확인</button>
+            <button 
+                :class="{'confirm-button': true, 'clicked': isClicked}" 
+                @click="ConfirmBtnSubmitHandler"
+                @animationend="resetButton"
+            >
+                확인
+            </button>
         </div>
     </div>
 </template>
@@ -53,7 +53,11 @@
             let expenseDate = ref('')
             let expenseTime = ref('')
 
+            const isClicked = ref(false);
+
             const ConfirmBtnSubmitHandler = async () => {
+                isClicked.value = true;
+
                 console.log("버튼 클릭 함수 활성화")
 
                 //id 값을 가져오기 위함
@@ -92,7 +96,21 @@
                 }
             }
 
-            return { input_amount, expenseType, expenseMemo, expenseAmount, expenseDate, expenseTime, ConfirmBtnSubmitHandler }
+            const resetButton = () => {
+                isClicked.value = false;
+            }
+
+            return { 
+                input_amount, 
+                expenseType, 
+                expenseMemo, 
+                expenseAmount, 
+                expenseDate, 
+                expenseTime, 
+                ConfirmBtnSubmitHandler,
+                isClicked,
+                resetButton
+            }
         }
     }
 </script>
@@ -147,4 +165,23 @@
     .confirm-button {
         background-color: #fecd2f;
     }
-    </style>
+    
+    .confirm-button.clicked {
+        animation: click-animation 0.5s forwards;
+    }
+    
+    @keyframes click-animation {
+        0% {
+            background-color: #fecd2f;
+            transform: scale(1);
+        }
+        50% {
+            background-color: #ffe680;
+            transform: scale(1.1);
+        }
+        100% {
+            background-color: #fecd2f;
+            transform: scale(1);
+        }
+    }
+</style>

@@ -19,7 +19,6 @@
             <!--모달 팝업창 구현 (새로 리스트 추가)-->
             <img src="../../images/memo_icon.png" width="23px" @click="openModal" alt="추가 이미지" />
             <AddList :isVisible="isModalVisible" @close="closeModal">
-                <!-- <p>여기에 모달 내용을 넣으세요.</p> -->
             </AddList>
         </div>
     </div>
@@ -62,7 +61,7 @@
 <style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
     /* 구글 폰트 임포트 */
-    
+
     .list-header {
         display: flex;
         justify-content: space-between;

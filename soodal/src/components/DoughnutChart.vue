@@ -173,7 +173,7 @@
     }
 
     .chart-container canvas {
-        width: 100% !important;
-        height: auto !important;
+        width: 100%;
+        height: auto; 
     }
 </style>

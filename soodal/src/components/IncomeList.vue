@@ -22,8 +22,12 @@
             <input type="time" id="time" v-model="incomeTime" />
         </div>
         <div class="buttons">
-            <!-- <button @click="cancel" class="cancel-button">취소</button> -->
-            <button @click="ConfirmBtnSubmitHandler" class="confirm-button">확인</button>
+            <button 
+                :class="{'confirm-button': true, 'clicked': isClicked}" 
+                @click="ConfirmBtnSubmitHandler"
+                @animationend="resetButton">
+                확인
+            </button>
         </div>
     </div>
 </template>
@@ -44,7 +48,10 @@
             let incomeDate = ref('')
             let incomeTime = ref('')
 
+            const isClicked = ref(false);
+
             const ConfirmBtnSubmitHandler = async () => {
+                isClicked.value = true;
                 console.log("버튼 클릭 함수 활성화")
 
                 //id 값을 가져오기 위함
@@ -83,7 +90,21 @@
                 }
             }
 
-            return { input_amount, incomeType, incomeMemo, incomeAmount, incomeDate, incomeTime, ConfirmBtnSubmitHandler }
+            const resetButton = () => {
+                isClicked.value = false;
+            }
+
+            return { 
+                input_amount, 
+                incomeType, 
+                incomeMemo, 
+                incomeAmount, 
+                incomeDate, 
+                incomeTime, 
+                ConfirmBtnSubmitHandler,
+                isClicked,
+                resetButton
+            }
         }
     }
 </script>
@@ -95,6 +116,7 @@
         font-family: Arial, sans-serif;
         text-align: center;
     }
+    
     .form-group {
         display: flex;
         align-items: center;
@@ -136,5 +158,24 @@
     
     .confirm-button {
         background-color: #fecd2f;
+    }
+    
+    .confirm-button.clicked {
+        animation: click-animation 0.5s forwards;
+    }
+    
+    @keyframes click-animation {
+        0% {
+            background-color: #fecd2f;
+            transform: scale(1);
+        }
+        50% {
+            background-color: #ffe680;
+            transform: scale(1.1);
+        }
+        100% {
+            background-color: #fecd2f;
+            transform: scale(1);
+        }
     }
 </style>
