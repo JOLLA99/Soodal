@@ -57,7 +57,33 @@ npm run build
 data라는 이름을 가지는 jSON 데이터 아래로 **id값이 PK**
 
 ## Project Structure
-아래에 프로젝트 스트럭쳐 추가
+📦src
+ ┣ 📂assets
+ ┃ ┣ 📜base.css
+ ┃ ┣ 📜logo.svg
+ ┃ ┗ 📜main.css
+ ┣ 📂components
+ ┃ ┣ 📜.DS_Store
+ ┃ ┣ 📜AddList.vue
+ ┃ ┣ 📜Calendar.vue
+ ┃ ┣ 📜CountTop.vue
+ ┃ ┣ 📜DoughnutChart.vue
+ ┃ ┣ 📜ExpenseList.vue
+ ┃ ┣ 📜IncomeList.vue
+ ┃ ┣ 📜List.vue
+ ┃ ┣ 📜ListHeader.vue
+ ┃ ┣ 📜LoginGuide.vue
+ ┃ ┣ 📜LoginModal.vue
+ ┃ ┣ 📜LoginReminderModal.vue
+ ┃ ┣ 📜Main.vue
+ ┃ ┣ 📜PayTop.vue
+ ┃ ┣ 📜RecentContract.vue
+ ┃ ┗ 📜sidebar.vue
+ ┣ 📂router
+ ┃ ┗ 📜index.js
+ ┣ 📜.DS_Store
+ ┣ 📜App.vue
+ ┗ 📜main.js
 
 ## Technical Stack
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
