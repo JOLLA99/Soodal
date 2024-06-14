@@ -68,6 +68,11 @@ data라는 이름을 가지는 jSON 데이터 아래로 **id값이 PK**
 
 ## Web Preview 
 
+![img](./modal_add_page.png)
+![img](./main_page.png)
+![img](./list_page.png)
+![img](./calendar_page.png)
+
 ## Contributor
 - 전공 B반 주정윤, [github](https://github.com/JOLLA99)
 - 전공 B반 김건영,  
