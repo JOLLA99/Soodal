@@ -71,6 +71,8 @@ SOODAL은 사용자가 수입과 지출을 손쉽게 관리할 수 있도록 도
 - **소비 패턴 개선**: 사용자는 자신의 소비 패턴을 분석하고 개선할 수 있어, 불필요한 지출을 줄일 수 있습니다.
 - **재정 목표 달성**: SOODAL을 통해 사용자는 명확한 재정 목표를 세우고 이를 달성할 수 있습니다.
 
+
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
