@@ -57,6 +57,7 @@ npm run build
 data라는 이름을 가지는 jSON 데이터 아래로 **id값이 PK**
 
 ## Project Structure
+```
 📦src
  ┣ 📂assets
  ┃ ┣ 📜base.css
@@ -84,6 +85,7 @@ data라는 이름을 가지는 jSON 데이터 아래로 **id값이 PK**
  ┣ 📜.DS_Store
  ┣ 📜App.vue
  ┗ 📜main.js
+```
 
 ## Technical Stack
 ![Vue.js](https://img.shields.io/badge/vuejs-%2335495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%234FC08D)
