@@ -1,4 +1,3 @@
-<!-- LoginModal.vue -->
 <template>
     <div v-if="showModal" class="modal-backdrop">
         <div class="modal-dialog" @click.stop>
@@ -37,6 +36,7 @@ const emit = defineEmits(['close', 'login']);
 
 const memberId = ref('');
 const memberPwd = ref('');
+const memberName = ref('');
 const errorMessage = ref('');
 const users = ref([]);
 const router = useRouter();
@@ -61,11 +61,12 @@ const handleLogin = () => {
     );
 
     if (user) {
+        localStorage.setItem('loggedInUser', JSON.stringify({ memberId: user.member_id, memberPwd: user.member_pwd, memberName: user.member_name}));
         errorMessage.value = '';
         memberId.value = '';
         memberPwd.value = '';
-        localStorage.setItem('loggedInUser', JSON.stringify({ memberId: user.member_id, memberPwd: user.member_pwd }));
-        emit('login', user.member_id, user.member_pwd);
+
+        emit('login', user.member_name);
         emit('close');
     } else {
         errorMessage.value = '아이디 또는 비밀번호가 일치하지 않습니다.';
