@@ -96,6 +96,7 @@
                     const data = response.data;
                     // Process data to extract labels and amounts grouped by month
                     const groupedData = groupDataByMonth(data);
+                    console.log(groupedData);
                     chartData.value.labels = Object.keys(groupedData).map(month => `${month}월`);
                     const monthAmounts = Object.values(groupedData).map(monthData => {
                         return monthData.reduce((sum, entry) => sum + (entry.type === '수입' ? parseInt(entry.amount, 10) : -parseInt(entry.amount, 10)), 0);
@@ -123,6 +124,7 @@
                     }
                     groupedData[month].push(entry);
                 });
+                
                 return groupedData;
             }
             const formatAmount = (amount) => {

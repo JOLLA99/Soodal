@@ -79,7 +79,7 @@ export default defineComponent({
         }
         return {
             calendarOptions,
-            currentEvents,
+            currentEvents
         }
     }
 })
